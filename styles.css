@@ -15,7 +15,7 @@ body {
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     overflow-x: hidden;
-    padding: 2rem 0;
+    padding: 1rem;
 }
 
 @keyframes gradient {
@@ -26,17 +26,17 @@ body {
 
 .container {
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
     width: 100%;
-    max-width: 1000px;
+    max-width: 800px;
     position: relative;
     z-index: 1;
 }
 
 h1 {
     font-weight: 300;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     color: #fff;
     text-shadow: 0 2px 10px rgba(0,0,0,0.1);
     letter-spacing: -0.5px;
@@ -44,9 +44,9 @@ h1 {
 
 .breathing-circle {
     position: relative;
-    width: 320px;
-    height: 320px;
-    margin: 0 auto 2rem;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,8 +54,8 @@ h1 {
 
 .circle {
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -108,11 +108,11 @@ h1 {
 }
 
 .controls {
-    max-width: 450px;
+    max-width: 400px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@ h1 {
 .settings {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
     text-align: left;
 }
 
@@ -151,7 +151,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     position: relative;
 }
 
@@ -209,31 +209,31 @@ input[type="checkbox"] {
 
 @media (max-width: 768px) {
     body {
-        padding: 1rem 0;
+        padding: 0.5rem;
     }
 
     .breathing-circle {
-        width: 280px;
-        height: 280px;
+        width: 240px;
+        height: 240px;
     }
     
     .circle {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
     
     h1 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
     }
     
     .instruction {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .controls {
-        padding: 1.2rem;
-        margin: 0 1rem;
+        padding: 1rem;
+        margin: 0 0.5rem;
     }
     
     .setting {
@@ -242,8 +242,29 @@ input[type="checkbox"] {
         gap: 0.5rem;
     }
     
-    select {
+    select, .number-input {
         width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .breathing-circle {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .circle {
+        width: 160px;
+        height: 160px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .instruction {
+        font-size: 1.2rem;
     }
 }
 
