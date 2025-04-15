@@ -84,6 +84,7 @@ class BreathingExercise {
                 maxRounds: parseInt(this.durationSelect.value),
                 breathsPerRound: 30,
                 retentionTime: 90,  // 1.5 minutes retention
+                recoveryInhale: 5,  // 5 second inhale
                 recoveryHold: 15    // 15 second recovery hold
             };
         }
@@ -146,6 +147,7 @@ class BreathingExercise {
         // Set active icon based on phase and pattern
         switch(phase) {
             case 'inhale':
+            case 'recoveryInhale':
                 this.noseIcon.classList.add('active');
                 break;
             case 'exhale':
@@ -168,22 +170,15 @@ class BreathingExercise {
             exhale: 'Out',
             outHold: 'Hold',
             retention: 'Hold',
-            recovery: 'Recovery Hold'
+            recovery: 'Recovery Hold',
+            recoveryInhale: 'Deep Inhale'
         };
         
-        // For Wim Hof retention and recovery
-        if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery')) {
-            this.instruction.style.display = 'flex';
-            this.instruction.style.flexDirection = 'column';
-            this.instruction.style.alignItems = 'center';
-            this.instruction.style.gap = '0.5rem';
+        // For Wim Hof retention and recovery, show only the timer in large format
+        if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
             this.instruction.style.fontSize = '4rem';
-            this.instruction.innerHTML = `<div style="font-size: 1.8rem">${instructions[phase]}</div>${count}`;
+            this.instruction.textContent = count;
         } else {
-            this.instruction.style.display = '';
-            this.instruction.style.flexDirection = '';
-            this.instruction.style.alignItems = '';
-            this.instruction.style.gap = '';
             this.instruction.style.fontSize = '';
             this.instruction.textContent = count ? `${instructions[phase]} (${count})` : instructions[phase];
         }
@@ -203,7 +198,7 @@ class BreathingExercise {
             let timeLeft = duration;
             
             // For Wim Hof retention and recovery, show timer in instruction
-            if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery')) {
+            if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                 this.updateInstruction(phase, timeLeft);
                 this.timer.textContent = '';
             } else if (this.patternSelect.value !== 'wim-hof' || phase === 'retention') {
@@ -216,7 +211,7 @@ class BreathingExercise {
             
             this.phaseTimer = setInterval(() => {
                 timeLeft--;
-                if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery')) {
+                if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                     this.updateInstruction(phase, timeLeft);
                 } else if (this.patternSelect.value !== 'wim-hof' || phase === 'retention') {
                     this.timer.textContent = timeLeft;
@@ -256,7 +251,9 @@ class BreathingExercise {
                 await this.runPhase('retention', pattern.retentionTime);
                 if (!this.isRunning) break;
                 
-                // Recovery breath with large timer
+                // Recovery breath with 5-second inhale and 15-second hold
+                await this.runPhase('recoveryInhale', pattern.recoveryInhale);
+                if (!this.isRunning) break;
                 await this.runPhase('recovery', pattern.recoveryHold);
                 if (!this.isRunning) break;
                 
