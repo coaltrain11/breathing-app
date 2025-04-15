@@ -161,10 +161,10 @@ h1 {
 
 select, .number-input {
     padding: 0.6rem 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
     font-size: 0.95rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.3);
     color: #fff;
     cursor: pointer;
     backdrop-filter: blur(5px);
@@ -185,18 +185,21 @@ select, .number-input {
 }
 
 select:hover, .number-input:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 select:focus, .number-input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 select option {
     background: #2c5364;
     color: #fff;
+    padding: 0.5rem;
 }
 
 label {
@@ -253,8 +256,9 @@ input[type="checkbox"] {
     .controls {
         padding: 1rem;
         margin: 0.5rem;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .setting {
@@ -266,8 +270,16 @@ input[type="checkbox"] {
     select, .number-input {
         width: 100%;
         min-width: unset;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.4);
         color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    select:focus, .number-input:focus {
+        background: rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.6);
     }
 
     label {
@@ -306,12 +318,18 @@ input[type="checkbox"] {
     .controls {
         padding: 0.8rem;
         margin: 0.3rem;
+        background: rgba(0, 0, 0, 0.5);
     }
 
     .start-button {
         padding: 0.7rem 2rem;
         font-size: 1rem;
         margin-bottom: 1rem;
+    }
+
+    select, .number-input {
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
     }
 }
 
