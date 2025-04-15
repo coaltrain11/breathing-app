@@ -35,4 +35,4 @@ A minimalist web application for guided breathing exercises, featuring multiple 
 
 ## Try It Out
 
-Visit [GitHub Pages URL] to try the app (link will be active once GitHub Pages is set up). 
+Visit [https://coaltrain11.github.io/breathing-app/](https://coaltrain11.github.io/breathing-app/) to try the app. 
