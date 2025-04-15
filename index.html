@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Breathing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Mindful Breathing</h1>
+        <div class="breathing-circle">
+            <div class="circle"></div>
+            <div class="instruction-container">
+                <div class="instruction">Get Ready</div>
+                <div class="breathing-method">
+                    <svg class="nose-icon" viewBox="0 0 24 24" width="40" height="40">
+                        <!-- Connected nose shape -->
+                        <path d="M12 4 L12 10 C12 10 8 10 8 12 C8 13.5 10 14 12 13 C14 14 16 13.5 16 12 C16 10 12 10 12 10" 
+                              stroke="currentColor" 
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              fill="none"/>
+                        <!-- Even thinner nostril indentations -->
+                        <path d="M10 12 C10 12.6 11 12.6 11 12" 
+                              stroke="currentColor" 
+                              stroke-width="1.5"
+                              stroke-linecap="round"/>
+                        <path d="M13 12 C13 12.6 14 12.6 14 12" 
+                              stroke="currentColor" 
+                              stroke-width="1.5"
+                              stroke-linecap="round"/>
+                    </svg>
+                    <svg class="mouth-icon" viewBox="0 0 24 24" width="40" height="40">
+                        <path d="M6 11C6 11 9 9 12 9C15 9 18 11 18 11L17 12C17 12 14.5 11 12 11C9.5 11 7 12 7 12L6 11Z" fill="currentColor"/>
+                        <path d="M7 12C7 12 9.5 14 12 14C14.5 14 17 12 17 12C17 12 15 16 12 16C9 16 7 12 7 12Z" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="timer"></div>
+        </div>
+        <div class="controls">
+            <button id="startButton" class="start-button">Start Exercise</button>
+            <div class="settings">
+                <div class="setting">
+                    <label for="duration">Session Duration (minutes):</label>
+                    <input type="number" id="duration" min="1" max="99" value="5" class="number-input">
+                </div>
+                <div class="setting">
+                    <label for="pattern">Breathing Pattern:</label>
+                    <select id="pattern">
+                        <option value="4-4-4-4">Box (4-4-4-4)</option>
+                        <option value="4-7-8">4-7-8 Relaxing</option>
+                        <option value="6-3-6-3">6-3-6-3 Energizing</option>
+                        <option value="wim-hof">Wim Hof Method</option>
+                    </select>
+                </div>
+                <div class="setting">
+                    <label for="sound">
+                        <input type="checkbox" id="sound">
+                        Enable Sound
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
