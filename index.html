@@ -2,18 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mindful Breathing</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>Mindful Breathing</h1>
         <div class="breathing-circle">
-            <div class="circle"></div>
+            <svg class="lotus-flower" viewBox="0 0 400 400" width="320" height="320">
+                <!-- Outer Petals -->
+                <g class="petals-layer-1">
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(45 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(90 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(135 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(180 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(225 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(270 200 200)" />
+                    <path class="petal" d="M200 120 C 180 80, 160 60, 140 80 C 120 100, 140 140, 200 160 C 260 140, 280 100, 260 80 C 240 60, 220 80, 200 120" fill="rgba(147, 112, 219, 0.8)" transform="rotate(315 200 200)" />
+                </g>
+                <!-- Inner Petals -->
+                <g class="petals-layer-2">
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(45 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(90 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(135 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(180 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(225 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(270 200 200)" />
+                    <path class="petal" d="M200 140 C 185 110, 170 95, 155 110 C 140 125, 155 155, 200 170 C 245 155, 260 125, 245 110 C 230 95, 215 110, 200 140" fill="rgba(186, 85, 211, 0.9)" transform="rotate(315 200 200)" />
+                </g>
+                <!-- Center -->
+                <circle class="flower-center" cx="200" cy="200" r="30" fill="rgba(255, 182, 193, 0.9)" />
+            </svg>
             <div class="instruction-container">
                 <div class="instruction">Get Ready</div>
                 <div class="breathing-method">
@@ -40,8 +63,8 @@
                         <path d="M7 12C7 12 9.5 14 12 14C14.5 14 17 12 17 12C17 12 15 16 12 16C9 16 7 12 7 12Z" fill="currentColor"/>
                     </svg>
                 </div>
+                <div class="timer"></div>
             </div>
-            <div class="timer"></div>
         </div>
         <div class="controls">
             <button id="startButton" class="start-button">Start Exercise</button>

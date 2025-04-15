@@ -10,6 +10,7 @@ class BreathingExercise {
         this.breathingMethod = document.querySelector('.breathing-method');
         this.noseIcon = document.querySelector('.nose-icon');
         this.mouthIcon = document.querySelector('.mouth-icon');
+        this.flower = document.querySelector('.lotus-flower');
         
         this.isRunning = false;
         this.currentPhase = 0;
@@ -19,6 +20,8 @@ class BreathingExercise {
         
         this.audioContext = null;
         this.oscillator = null;
+        
+        this.lastPhase = null;
         
         this.startButton.addEventListener('click', () => this.toggleExercise());
         this.setupAudio();
@@ -30,6 +33,9 @@ class BreathingExercise {
         this.soundToggle.addEventListener('change', () => {
             if (this.soundToggle.checked && !this.audioContext) {
                 this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (!this.soundToggle.checked && this.oscillator) {
+                this.oscillator.stop();
             }
         });
     }
@@ -187,38 +193,62 @@ class BreathingExercise {
 
     async runPhase(phase, duration) {
         return new Promise(resolve => {
-            this.updateCircleAnimation(phase, duration);
-            
-            if (phase === 'inhale') {
-                this.playTone(396, 0.1); // G4 note
-            } else if (phase === 'exhale') {
-                this.playTone(264, 0.1); // C4 note
-            }
-            
             let timeLeft = duration;
             
             // For Wim Hof retention and recovery, show timer in instruction
             if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                 this.updateInstruction(phase, timeLeft);
                 this.timer.textContent = '';
-            } else if (this.patternSelect.value !== 'wim-hof' || phase === 'retention') {
+            } else {
                 this.timer.textContent = timeLeft;
                 this.updateInstruction(phase);
-            } else {
-                this.timer.textContent = '';
-                this.updateInstruction(phase);
+            }
+            
+            // Remove all animation classes first
+            this.flower.classList.remove('inhale', 'exhale', 'hold-expanded', 'hold-contracted');
+            
+            // Handle flower animation based on phase
+            switch(phase) {
+                case 'inhale':
+                case 'recoveryInhale':
+                    this.flower.classList.add('inhale');
+                    this.lastPhase = 'inhale';
+                    if (this.soundToggle.checked) {
+                        this.playTone(396, 0.1); // G4 note
+                    }
+                    break;
+                case 'exhale':
+                    this.flower.classList.add('exhale');
+                    this.lastPhase = 'exhale';
+                    if (this.soundToggle.checked) {
+                        this.playTone(264, 0.1); // C4 note
+                    }
+                    break;
+                case 'inHold':
+                case 'retention':
+                case 'recovery':
+                    // If we're holding after an inhale, stay expanded
+                    this.flower.classList.add(this.lastPhase === 'inhale' ? 'hold-expanded' : 'hold-contracted');
+                    break;
+                case 'outHold':
+                    // Always contracted for out-hold
+                    this.flower.classList.add('hold-contracted');
+                    break;
             }
             
             this.phaseTimer = setInterval(() => {
                 timeLeft--;
                 if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                     this.updateInstruction(phase, timeLeft);
-                } else if (this.patternSelect.value !== 'wim-hof' || phase === 'retention') {
+                } else {
                     this.timer.textContent = timeLeft;
                 }
                 
                 if (timeLeft <= 0) {
                     clearInterval(this.phaseTimer);
+                    if (this.oscillator) {
+                        this.oscillator.stop();
+                    }
                     resolve();
                 }
             }, 1000);
@@ -314,8 +344,9 @@ class BreathingExercise {
         this.startButton.textContent = 'Start Exercise';
         this.instruction.textContent = 'Get Ready';
         this.timer.textContent = '';
-        this.circle.style.transform = 'scale(1)';
+        this.flower.classList.remove('inhale', 'exhale', 'hold-expanded', 'hold-contracted');
         this.breathingMethod.classList.remove('show');
+        this.lastPhase = null;
         
         if (this.phaseTimer) {
             clearInterval(this.phaseTimer);
