@@ -52,117 +52,59 @@ h1 {
     align-items: center;
 }
 
-.lotus-flower {
+.circle {
     position: absolute;
-    width: 320px;
-    height: 320px;
-    filter: drop-shadow(0 0 20px rgba(147, 112, 219, 0.2));
-}
-
-.petals-layer-1,
-.petals-layer-2 {
-    transform-origin: center;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+    transform: scale(1);
     will-change: transform;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                filter 0.4s ease;
 }
 
-.lotus-flower.inhale .petals-layer-1,
-.lotus-flower.hold-expanded .petals-layer-1 {
-    animation: none;
-    transform: scale(1.4);
-    opacity: 1;
-    filter: brightness(1.1);
-    transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                filter 0.4s ease;
-}
-
-.lotus-flower.inhale .petals-layer-2,
-.lotus-flower.hold-expanded .petals-layer-2 {
-    animation: none;
-    transform: scale(1.4);
-    opacity: 1;
-    filter: brightness(1.1);
-    transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                filter 0.4s ease;
-}
-
-.lotus-flower.exhale .petals-layer-1,
-.lotus-flower.hold-contracted .petals-layer-1 {
-    animation: none;
-    transform: scale(0.6);
-    opacity: 0.8;
-    filter: brightness(0.9);
-    transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                filter 0.4s ease;
-}
-
-.lotus-flower.exhale .petals-layer-2,
-.lotus-flower.hold-contracted .petals-layer-2 {
-    animation: none;
-    transform: scale(0.6);
-    opacity: 0.8;
-    filter: brightness(0.9);
-    transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.4s ease,
-                filter 0.4s ease;
-}
-
-.lotus-flower.hold-expanded .petals-layer-1,
-.lotus-flower.hold-expanded .petals-layer-2 {
-    transform: scale(1.4);
-    opacity: 1;
-    filter: brightness(1.1);
-}
-
-.lotus-flower.hold-contracted .petals-layer-1,
-.lotus-flower.hold-contracted .petals-layer-2 {
-    transform: scale(0.6);
-    opacity: 0.8;
-    filter: brightness(0.9);
-}
-
-.petal {
-    transition: opacity 0.3s ease;
-}
-
-.instruction-container {
+.circle::before {
+    content: '';
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    z-index: 2;
-    pointer-events: none;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+    z-index: -1;
+}
+
+.circle.animate {
+    animation: pulse 8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    25% { transform: scale(1.4); opacity: 1; }
+    50% { transform: scale(1); opacity: 0.8; }
+    75% { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
 .instruction {
-    font-size: 2.2rem;
-    font-weight: 200;
+    font-size: 1.8rem;
+    font-weight: 300;
     color: #fff;
-    text-shadow: 0 2px 15px rgba(147, 112, 219, 0.5),
-                 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s ease;
-    text-align: center;
-    letter-spacing: 1px;
-    transform-origin: center;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
 .timer {
-    font-size: 1.6rem;
-    font-weight: 200;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 2px 15px rgba(147, 112, 219, 0.5),
-                 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s ease;
-    opacity: 0.9;
+    position: absolute;
+    bottom: 25%;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
 }
 
 .controls {
@@ -305,25 +247,33 @@ input[type="checkbox"] {
     }
 }
 
+.instruction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1;
+}
+
 .breathing-method {
     display: flex;
     gap: 2rem;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    margin-top: 0.5rem;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    margin-top: 0.8rem;
 }
 
 .breathing-method.show {
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .nose-icon,
 .mouth-icon {
-    width: 36px;
-    height: 36px;
-    opacity: 0.7;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 2px 15px rgba(147, 112, 219, 0.4));
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    stroke-width: 1.5;
+    fill: currentColor;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
 }
 
 .nose-icon {
@@ -338,16 +288,6 @@ input[type="checkbox"] {
 .nose-icon.active,
 .mouth-icon.active {
     opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
     transform: scale(1.15);
-    filter: drop-shadow(0 2px 20px rgba(147, 112, 219, 0.6));
-}
-
-.lotus-flower.inhale .instruction,
-.lotus-flower.hold-expanded .instruction {
-    transform: scale(1.1);
-}
-
-.lotus-flower.exhale .instruction,
-.lotus-flower.hold-contracted .instruction {
-    transform: scale(0.9);
 } 
