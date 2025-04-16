@@ -1,6 +1,6 @@
 # Breathing Exercise App
 
-A minimalist web application for guided breathing exercises, featuring multiple breathing patterns including the Wim Hof method.
+A minimalist web application for guided breathing exercises, featuring multiple breathing patterns including the Tummo method.
 
 ## Features
 
@@ -8,9 +8,9 @@ A minimalist web application for guided breathing exercises, featuring multiple 
   - Box Breathing (4-4-4-4)
   - 4-7-8 Relaxing Breath
   - 6-3-6-3 Energizing Breath
-  - Wim Hof Method (30 power breaths + retention)
+  - Tummo Method (30 power breaths + retention)
 
-- Wim Hof Method specific features:
+- Tummo Method specific features:
   - Customizable number of rounds
   - 30 power breaths per round
   - 90-second retention phase

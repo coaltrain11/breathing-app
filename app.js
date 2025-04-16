@@ -12,16 +12,30 @@ class BreathingExercise {
         this.mouthIcon = document.querySelector('.mouth-icon');
         this.flower = document.querySelector('.lotus-flower');
         
+        this.breathingPatterns = {
+            'box': { inhale: 4, hold: 4, exhale: 4, pause: 4 },
+            '4-7-8': { inhale: 4, hold: 7, exhale: 8, pause: 0 },
+            '6-3-6-3': { inhale: 6, hold: 3, exhale: 6, pause: 3 },
+            'tummo': { 
+                powerBreaths: 30,
+                retention: 0,
+                recovery: 0,
+                rounds: 3
+            }
+        };
+        this.currentPattern = 'tummo';
         this.isRunning = false;
-        this.currentPhase = 0;
-        this.timeLeft = 0;
+        this.currentPhase = null;
+        this.lastPhase = null;
+        this.round = 1;
+        this.breathCount = 0;
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.loadSounds();
+        
         this.sessionTimer = null;
         this.phaseTimer = null;
         
-        this.audioContext = null;
         this.oscillator = null;
-        
-        this.lastPhase = null;
         
         this.startButton.addEventListener('click', () => this.toggleExercise());
         this.setupAudio();
@@ -157,10 +171,10 @@ class BreathingExercise {
                 this.noseIcon.classList.add('active');
                 break;
             case 'exhale':
-                // For box breathing, 4-7-8, and Wim Hof, exhale through mouth
+                // For box breathing, 4-7-8, and Tummo, exhale through mouth
                 if (this.patternSelect.value === '4-4-4-4' || 
                     this.patternSelect.value === '4-7-8' ||
-                    this.patternSelect.value === 'wim-hof') {
+                    this.patternSelect.value === 'tummo') {
                     this.mouthIcon.classList.add('active');
                 } else {
                     this.noseIcon.classList.add('active');
@@ -180,8 +194,8 @@ class BreathingExercise {
             recoveryInhale: 'Deep Inhale'
         };
         
-        // For Wim Hof retention and recovery, show only the timer in large format
-        if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
+        // For Tummo retention and recovery, show only the timer in large format
+        if (this.patternSelect.value === 'tummo' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
             this.instruction.style.fontSize = '4rem';
             this.instruction.textContent = count;
         } else {
@@ -195,8 +209,8 @@ class BreathingExercise {
         return new Promise(resolve => {
             let timeLeft = duration;
             
-            // For Wim Hof retention and recovery, show timer in instruction
-            if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
+            // For Tummo retention and recovery, show timer in instruction
+            if (this.patternSelect.value === 'tummo' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                 this.updateInstruction(phase, timeLeft);
                 this.timer.textContent = '';
             } else {
@@ -238,7 +252,7 @@ class BreathingExercise {
             
             this.phaseTimer = setInterval(() => {
                 timeLeft--;
-                if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
+                if (this.patternSelect.value === 'tummo' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
                     this.updateInstruction(phase, timeLeft);
                 } else {
                     this.timer.textContent = timeLeft;
@@ -324,7 +338,7 @@ class BreathingExercise {
         this.isRunning = true;
         this.startButton.textContent = 'Stop';
         
-        if (this.patternSelect.value !== 'wim-hof') {
+        if (this.patternSelect.value !== 'tummo') {
             const durationInMinutes = parseInt(this.durationSelect.value);
             this.timeLeft = durationInMinutes * 60;
             
