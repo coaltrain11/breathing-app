@@ -83,7 +83,7 @@ class BreathingExercise {
                 roundCount: 0,
                 maxRounds: parseInt(this.durationSelect.value),
                 breathsPerRound: 30,
-                retentionTime: 90,  // 1.5 minutes retention
+                retentionTime: 60,  // 60 seconds retention
                 recoveryInhale: 5,  // 5 second inhale
                 recoveryHold: 15    // 15 second recovery hold
             };
@@ -174,13 +174,15 @@ class BreathingExercise {
             recoveryInhale: 'Deep Inhale'
         };
         
-        // For Wim Hof retention and recovery, show only the timer in large format
+        // For Wim Hof retention and recovery, show the instruction and timer
         if (this.patternSelect.value === 'wim-hof' && (phase === 'retention' || phase === 'recovery' || phase === 'recoveryInhale')) {
             this.instruction.style.fontSize = '4rem';
-            this.instruction.textContent = count;
+            this.instruction.textContent = instructions[phase];
+            this.timer.textContent = count;
         } else {
             this.instruction.style.fontSize = '';
             this.instruction.textContent = count ? `${instructions[phase]} (${count})` : instructions[phase];
+            this.timer.textContent = '';
         }
         this.updateBreathingMethod(phase);
     }
